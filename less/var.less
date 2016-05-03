@@ -1,0 +1,81 @@
+@import "respone.less";
+*{
+  box-sizing: border-box;
+}
+.pad(@padding){
+  padding-left: @padding;
+  padding-right: @padding;
+}
+.container{
+  &{
+    height:auto;
+    margin-left: auto!important;
+    margin-right: auto!important;
+    display:block;
+    overflow: hidden;
+  }
+  &-filud{
+    height:auto;
+    .pad(@padding);
+    display:block;
+    overflow: hidden;
+  }
+  &-fild .row,& .row{
+    display: block;
+    margin-left: -@padding;
+    margin-right: -@padding;
+  }
+  &-fild .row:after,& .row:after{
+    content: "";
+    clear:both;
+    display: block;
+    height: 0;
+    line-height:0;
+    font-size:0;
+  }
+}
+
+.grid(@type,@i:1)when(@i<=@cols){
+    .col-@{type}-@{i}{
+    width: 100%/@cols*@i;
+      display: block;
+      float: left;
+      //.pad(@padding);
+   }
+    .grid(@type,@i+1);
+}
+;
+.grid(xs);
+.g(@type,@name){
+  @media screen and (min-width:@name){
+    .container{
+      width:100%;
+    }
+    .grid(@type);
+  }
+}
+.g(sm,@smscreen);
+.g(md,@mdscreen);
+.g(lg,@lgscreen);
+@media screen and (max-width:@smscreen){
+  .hidden-xs{
+    display:none;
+  }
+}
+@media screen and (min-width:@smscreen) and (max-width:@mdscreen){
+  .hidden-md{
+    display:none;
+  }
+}
+@media screen and (min-width:@mdscreen) and (max-width:@lgscreen){
+  .hidden-lg{
+    display:none;
+  }
+}
+@media screen and (min-width:@lgscreen){
+  .hidden-lg{
+    display:none;
+  }
+}
+
+
